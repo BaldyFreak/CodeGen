@@ -1,12 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ardalis.Specification.EntityFrameworkCore;
+using Garen.MultiTenant.Service.{{BusinessName}}.Specifications;
+using Garen.MultiTenant.Core.Entities;
+using Garen.MultiTenant.Core.Extensions;
+using Garen.MultiTenant.Infrastructure.Database.DbContexts;
+using Microsoft.EntityFrameworkCore;
 
-namespace {{Type.Get}}
+namespace Garen.MultiTenant.Service.{{BusinessName}}
 {
-    class service
+    public partial class {{ClassName}}Service : RepositoryBase<{{ClassName}}>
     {
+        private readonly ApplicationDbContext _context;
+
+        public {{ClassName}}Service(ApplicationDbContext context) : base(context)
+        {
+            _context = context;
+        }
+
+        #region 单表通用方法
+
+        public async Task<List<{{ClassName}}>> GetPage({{ClassName}} {{ClassNameCamelcase}})
+        {
+            var spec = new {{ClassName}}Specification({{ClassNameCamelcase}});
+            return await ApplySpecification(spec).StartPage({{ClassNameCamelcase}}).ToListAsync();
+        }
+        public async Task<List<{{ClassName}}>> GetPage(int pageNum,int pageSize)
+        {
+            return await _context.{{ClassName}}.StartPage(pageNum,pageSize).ToListAsync();
+        }
+
+        public async Task DeleteRange(long[] ids)
+        {
+            var dictTypes = await _context.SysDictType.Where(x=>dictTypeIds.Contains(x.DictId)).ToListAsync();
+            await DeleteRangeAsync(dictTypes);
+        }
+        #endregion
     }
+
 }
