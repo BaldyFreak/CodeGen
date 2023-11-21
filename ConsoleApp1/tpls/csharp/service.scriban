@@ -1,39 +1,34 @@
 ﻿using Ardalis.Specification.EntityFrameworkCore;
-using Garen.MultiTenant.Service.{{BusinessName}}.Specifications;
+using Garen.MultiTenant.Service.{{moduleName}}.Specifications;
 using Garen.MultiTenant.Core.Entities;
 using Garen.MultiTenant.Core.Extensions;
 using Garen.MultiTenant.Infrastructure.Database.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace Garen.MultiTenant.Service.{{BusinessName}}
+namespace Garen.MultiTenant.Service.{{moduleName}}
 {
-    public partial class {{ClassName}}Service : RepositoryBase<{{ClassName}}>
+    public partial class {{genClass.ClassName}}Service : RepositoryBase<{{genClass.ClassName}}>
     {
-        private readonly ApplicationDbContext _context;
+        private readonly {{dbContext}} _context;
 
-        public {{ClassName}}Service(ApplicationDbContext context) : base(context)
+        public {{genClass.ClassName}}Service({{dbContext}} context) : base(context)
         {
             _context = context;
         }
-
-        #region 单表通用方法
-
-        public async Task<List<{{ClassName}}>> GetPage({{ClassName}} {{ClassNameCamelcase}})
+        public async Task<List<{{genClass.ClassName}}>> GetPage({{genClass.ClassName}} {{genClass.BusinessName}})
         {
-            var spec = new {{ClassName}}Specification({{ClassNameCamelcase}});
-            return await ApplySpecification(spec).StartPage({{ClassNameCamelcase}}).ToListAsync();
+            var spec = new {{genClass.ClassName}}Specification({{genClass.BusinessName}});
+            return await ApplySpecification(spec).StartPage({{genClass.BusinessName}}).ToListAsync();
         }
-        public async Task<List<{{ClassName}}>> GetPage(int pageNum,int pageSize)
+        public async Task<List<{{genClass.ClassName}}>> GetPage(int pageNum,int pageSize)
         {
-            return await _context.{{ClassName}}.StartPage(pageNum,pageSize).ToListAsync();
+            return await _context.{{genClass.ClassName}}.StartPage(pageNum,pageSize).ToListAsync();
         }
-
-        public async Task DeleteRange(long[] ids)
+        public async Task DeleteRange({{genClass.PkProp.PropType}} [] ids)
         {
-            var dictTypes = await _context.SysDictType.Where(x=>dictTypeIds.Contains(x.DictId)).ToListAsync();
-            await DeleteRangeAsync(dictTypes);
+            var {{genClass.BusinessName}}s = await _context.{{genClass.ClassName}}.Where(x=>ids.Contains(x.{{genClass.PkProp.PropName}})).ToListAsync();
+            await DeleteRangeAsync({{genClass.BusinessName}}s);
         }
-        #endregion
     }
 
 }

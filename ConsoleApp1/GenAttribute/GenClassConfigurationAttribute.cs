@@ -1,11 +1,4 @@
-﻿using ConsoleApp1.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp1.GenAttribute
+﻿namespace ConsoleApp1.GenAttribute
 {
     public class GenClassConfigurationAttribute : Attribute
     {
@@ -22,7 +15,7 @@ namespace ConsoleApp1.GenAttribute
         public string ClassName { get; set; }
         public string BusinessName { get; set; }
         public string ClassDescription { get; set; }
-        public GenProp PkColumn { get; set; } = new GenProp();
-        public List<GenProp> Columns { get; set; } = new List<GenProp>();
+        public GenPropConfigurationAttribute PkProp { get; set; }
+        public List<GenPropConfigurationAttribute> Props { get; set; } = new List<GenPropConfigurationAttribute>();
     }
 }
