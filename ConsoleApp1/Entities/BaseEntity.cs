@@ -10,17 +10,17 @@ namespace ConsoleApp1.Entities
     public class BaseEntity
     {
         [GenPropConfiguration(propType: "string", propName: "CreateBy", propDescription: "创建者", isPk: false, isIncrement: false, isRequired: false,
-            isInsert: false, isEdit: false, isList: true, isQuery: false, queryType: "EQ", htmlType: "input", dictType: "")]
+            isInsert: false, isEdit: false, isList: true, isQuery: false, queryType: "==", htmlType: "input", dictType: "")]
         public string CreateBy { get; set; }
 
 
         [GenPropConfiguration(propType: "string", propName: "UpdateBy", propDescription: "更新者", isPk: false, isIncrement: false, isRequired: false,
-            isInsert: false, isEdit: false, isList: true, isQuery: false, queryType: "EQ", htmlType: "input", dictType: "")]
+            isInsert: false, isEdit: false, isList: true, isQuery: false, queryType: "==", htmlType: "input", dictType: "")]
         public string UpdateBy { get; set; }
 
 
         [GenPropConfiguration(propType: "DateTime", propName: "CreateTime", propDescription: "创建时间", isPk: false, isIncrement: false, isRequired: false,
-            isInsert: false, isEdit: false, isList: true, isQuery: false, queryType: "EQ", htmlType: "date-picker", dictType: "")]
+            isInsert: false, isEdit: false, isList: true, isQuery: true, queryType: "==", htmlType: "date-picker", dictType: "")]
         public DateTime CreateTime { get; set; }
 
         [GenPropConfiguration(propType: "DateTime", propName: "UpdateTime", propDescription: "更新时间", isPk: false, isIncrement: false, isRequired: false,

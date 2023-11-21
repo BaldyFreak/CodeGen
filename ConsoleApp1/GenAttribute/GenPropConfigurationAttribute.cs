@@ -60,7 +60,7 @@ namespace ConsoleApp1.GenAttribute
         public bool IsEdit { get; set; } = true;
         public bool IsList { get; set; } = true;
         public bool IsQuery { get; set; } = true;
-        public string QueryType { get; set; } = "EQ";
+        public string QueryType { get; set; } = "==";
         public string HtmlType { get; set; } = "input";
         public string DictType { get; set; } = string.Empty;
     }

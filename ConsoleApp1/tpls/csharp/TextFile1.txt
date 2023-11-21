@@ -1,0 +1,29 @@
+﻿if ({{genClass.BusinessName}}.UserId != 0)
+            {
+                Query.Where(x => x.UserId == {{genClass.BusinessName}}.UserId);
+            }
+            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.UserName))
+            {
+                Query.Where(x => EF.Functions.Like(x.UserName, $"%{{{genClass.BusinessName}}.UserName}%"));
+            }
+            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.Phonenumber))
+            {
+                Query.Where(x => EF.Functions.Like(x.Phonenumber, $"%{{{genClass.BusinessName}}.Phonenumber}%"));
+            }
+            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.Status))
+            {
+                Query.Where(x => x.Status == {{genClass.BusinessName}}.Status);
+            }
+            if ({{genClass.BusinessName}}.Params != null && {{genClass.BusinessName}}.Params.Count > 0)
+            {
+                if (!string.IsNullOrEmpty({{genClass.BusinessName}}.Params["beginTime"]))
+                {
+                    var beginTime = DateTime.Parse({{genClass.BusinessName}}.Params["beginTime"]);
+                    Query.Where(x => x.CreateTime >= beginTime);
+                }
+                if (!string.IsNullOrEmpty({{genClass.BusinessName}}.Params["endTime"]))
+                {
+                    var endTime = DateTime.Parse({{genClass.BusinessName}}.Params["endTime"]);
+                    Query.Where(x => x.CreateTime <= endTime);
+                }
+            }

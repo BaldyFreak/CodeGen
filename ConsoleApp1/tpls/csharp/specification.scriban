@@ -1,0 +1,42 @@
+﻿using Ardalis.Specification;
+using Garen.MultiTenant.Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
+namespace Garen.MultiTenant.Service.{{moduleName}}.Specifications
+{
+    public class {{genClass.ClassName}}Specification : Specification<{{genClass.ClassName}}>
+    {
+        public {{genClass.ClassName}}Specification({{genClass.ClassName}} {{genClass.BusinessName}})
+        {
+            
+            {{~ for Prop in genClass.Props ~}}
+                {{~ if (Prop.IsQuery)~}}
+                    {{~ if (Prop.PropType=="string") ~}}
+            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{Prop.PropName}}))
+            {
+                Query.Where(x => EF.Functions.Like(x.{{Prop.PropName}}, $"%{ {{genClass.BusinessName}}.{{Prop.PropName}} }%"));
+            }
+                    {{~ end ~}}
+                    {{~ if (Prop.PropType=="long" || Prop.PropType=="int") ~}}
+             if ({{genClass.BusinessName}}.{{Prop.PropName}} != 0)
+            {
+                Query.Where(x => x.{{Prop.PropName}} == {{genClass.BusinessName}}.{{Prop.PropName}});
+            }
+                    {{~ end ~}}
+                    {{~ if (Prop.PropType=="DateTime") ~}}
+            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{Prop.PropName}}))
+            {
+                Query.Where(x => x.{{Prop.PropName}} {{Prop.QueryType}} {{genClass.BusinessName}}.{{Prop.PropName}});
+            }
+                    {{~ end ~}}
+                {{~end~}}
+            {{~ end ~}}
+        }
+    }
+}
