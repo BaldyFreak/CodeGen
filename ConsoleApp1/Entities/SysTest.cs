@@ -17,5 +17,17 @@ namespace ConsoleApp1.Entities
             isInsert: true, isEdit: false, isList: false, isQuery: false, queryType: "==", htmlType: "input", dictType: "")]
         public string Password { get; set; }
 
+        [GenPropConfiguration(propType: "DateTime", propName: "OutDate", propDescription: "过期时间", isPk: false, isIncrement: false, isRequired: false,
+            isInsert: false, isEdit: false, isList: true, isQuery: true, queryType: "BETWEEN", htmlType: "datetime", dictType: "")]
+        public DateTime OutDate { get; set; }
+
+        [GenPropConfiguration(propType: "string", propName: "AvatarUrl", propDescription: "头像地址", isPk: false, isIncrement: false, isRequired: true,
+            isInsert: true, isEdit: true, isList: true, isQuery: false, queryType: "==", htmlType: "imageUpload", dictType: "")]
+        public string AvatarUrl { get; set; }
+
+        [GenPropConfiguration(propType: "string", propName: "Gender", propDescription: "性别", isPk: false, isIncrement: false, isRequired: true,
+            isInsert: true, isEdit: true, isList: true, isQuery: true, queryType: "==", htmlType: "select", dictType: "sys_user_sex")]
+        public string Gender { get; set; }
+
     }
 }

@@ -55,11 +55,11 @@ namespace ConsoleApp1.GenAttribute
         public string PropDescription { get; set; }
         public bool IsPk { get; set; } = false;
         public bool IsIncrement { get; set; } = false;
-        public bool IsRequired { get; set; } = false;
-        public bool IsInsert { get; set; } = true;
+        public bool IsRequired { get; set; } = false;//负责vue中表单rules校验
+        public bool IsInsert { get; set; } = true;//负责新增或者编辑模态框中的字段显示隐藏
         public bool IsEdit { get; set; } = true;
-        public bool IsList { get; set; } = true;
-        public bool IsQuery { get; set; } = true;
+        public bool IsList { get; set; } = true;//负责table组件中控制是否展示
+        public bool IsQuery { get; set; } = true;//负责form搜索组件中空值是否查询
         public string QueryType { get; set; } = "==";
         public string HtmlType { get; set; } = "input";
         public string DictType { get; set; } = string.Empty;

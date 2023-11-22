@@ -15,7 +15,7 @@ namespace ConsoleApp1.Entities
 
 
         [GenPropConfiguration(propType: "string", propName: "UpdateBy", propDescription: "更新者", isPk: false, isIncrement: false, isRequired: false,
-            isInsert: false, isEdit: false, isList: true, isQuery: false, queryType: "==", htmlType: "input", dictType: "")]
+            isInsert: false, isEdit: false, isList: false, isQuery: false, queryType: "==", htmlType: "input", dictType: "")]
         public string UpdateBy { get; set; }
 
 
@@ -24,11 +24,11 @@ namespace ConsoleApp1.Entities
         public DateTime CreateTime { get; set; }
 
         [GenPropConfiguration(propType: "DateTime", propName: "UpdateTime", propDescription: "更新时间", isPk: false, isIncrement: false, isRequired: false,
-            isInsert: false, isEdit: false, isList: true, isQuery: false, queryType: "EQ", htmlType: "date-picker", dictType: "")]
+            isInsert: false, isEdit: false, isList: false, isQuery: false, queryType: "EQ", htmlType: "date-picker", dictType: "")]
         public DateTime UpdateTime { get; set; }
 
         [GenPropConfiguration(propType: "string", propName: "Remark", propDescription: "备注", isPk: false, isIncrement: false, isRequired: false,
-            isInsert: true, isEdit: false, isList: true, isQuery: false, queryType: "EQ", htmlType: "input", dictType: "")]
+            isInsert: true, isEdit: false, isList: false, isQuery: false, queryType: "EQ", htmlType: "input", dictType: "")]
         public string Remark { get; set; }
     }
 }

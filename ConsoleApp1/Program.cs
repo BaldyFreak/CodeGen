@@ -1,9 +1,8 @@
 ﻿using ConsoleApp1.GenAttribute;
 using ConsoleApp1.Utils;
+using EasyTool;
 using Scriban;
 using System.Reflection;
-
-
 
 var rootPath = Path.Combine(Assembly.GetExecutingAssembly().Location, @"../../../../");
 
@@ -26,6 +25,10 @@ List<string> templatePaths = new List<string>()
 {
     @"./tpls/csharp/service.scriban",
     @"./tpls/csharp/specification.scriban",
+    @"./tpls/csharp/controller.scriban",
+    @"./tpls/csharp/api.scriban",
+    @"./tpls/csharp/test.vue.scriban",
+    @"./tpls/csharp/test.scriban",
 };
 
 Dictionary<string, string> dataMap = new();

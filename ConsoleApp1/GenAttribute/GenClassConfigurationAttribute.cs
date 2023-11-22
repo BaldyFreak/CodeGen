@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp1.GenAttribute
+﻿using EasyTool;
+
+namespace ConsoleApp1.GenAttribute
 {
     public class GenClassConfigurationAttribute : Attribute
     {
@@ -17,5 +19,6 @@
         public string ClassDescription { get; set; }
         public GenPropConfigurationAttribute PkProp { get; set; }
         public List<GenPropConfigurationAttribute> Props { get; set; } = new List<GenPropConfigurationAttribute>();
+        public string ClassNameCamelcase => StrUtil.ToFirstLetterLowerCase(ClassName);
     }
 }

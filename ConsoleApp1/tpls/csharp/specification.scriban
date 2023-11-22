@@ -14,25 +14,24 @@ namespace Garen.MultiTenant.Service.{{moduleName}}.Specifications
     {
         public {{genClass.ClassName}}Specification({{genClass.ClassName}} {{genClass.BusinessName}})
         {
-            
-            {{~ for Prop in genClass.Props ~}}
-                {{~ if (Prop.IsQuery)~}}
-                    {{~ if (Prop.PropType=="string") ~}}
-            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{Prop.PropName}}))
+            {{~ for prop in genClass.Props ~}}
+                {{~ if (prop.IsQuery)~}}
+                    {{~ if (prop.PropType=="string") ~}}
+            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{prop.PropName}}))
             {
-                Query.Where(x => EF.Functions.Like(x.{{Prop.PropName}}, $"%{ {{genClass.BusinessName}}.{{Prop.PropName}} }%"));
+                Query.Where(x => EF.Functions.Like(x.{{prop.PropName}}, $"%{ {{~genClass.BusinessName}}.{{prop.PropName~}} }%"));
             }
                     {{~ end ~}}
-                    {{~ if (Prop.PropType=="long" || Prop.PropType=="int") ~}}
-             if ({{genClass.BusinessName}}.{{Prop.PropName}} != 0)
+                    {{~ if (prop.PropType=="long" || prop.PropType=="int") ~}}
+             if ({{genClass.BusinessName}}.{{prop.PropName}} != 0)
             {
-                Query.Where(x => x.{{Prop.PropName}} == {{genClass.BusinessName}}.{{Prop.PropName}});
+                Query.Where(x => x.{{prop.PropName}} == {{genClass.BusinessName}}.{{prop.PropName}});
             }
                     {{~ end ~}}
-                    {{~ if (Prop.PropType=="DateTime") ~}}
-            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{Prop.PropName}}))
+                    {{~ if (prop.PropType=="DateTime") ~}}
+            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{prop.PropName}}))
             {
-                Query.Where(x => x.{{Prop.PropName}} {{Prop.QueryType}} {{genClass.BusinessName}}.{{Prop.PropName}});
+                Query.Where(x => x.{{prop.PropName}} {{prop.QueryType}} {{genClass.BusinessName}}.{{prop.PropName}});
             }
                     {{~ end ~}}
                 {{~end~}}

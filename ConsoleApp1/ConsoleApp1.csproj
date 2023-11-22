@@ -8,11 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EasyTool.Core" Version="2023.914.2" />
     <PackageReference Include="Scriban" Version="5.9.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="results\csharp\" />
   </ItemGroup>
+
+  
 
 </Project>

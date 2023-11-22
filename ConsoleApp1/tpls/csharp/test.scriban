@@ -1,0 +1,6 @@
+{{string.capitalize(genClass.ClassNameCamelcase)}}
+{{genClass.ClassNameCamelcase}}
+{{ ## This 
+is a multi
+line
+comment ## }}   

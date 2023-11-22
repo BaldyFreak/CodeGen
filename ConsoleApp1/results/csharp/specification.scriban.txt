@@ -14,14 +14,21 @@ namespace Garen.MultiTenant.Service.Admin.Specifications
     {
         public SysTestSpecification(SysTest test)
         {
-            
              if (test.TestId != 0)
             {
                 Query.Where(x => x.TestId == test.TestId);
             }
             if (!string.IsNullOrEmpty(test.TestName))
             {
-                Query.Where(x => EF.Functions.Like(x.TestName, $"%{ test.TestName }%"));
+                Query.Where(x => EF.Functions.Like(x.TestName, $"%{test.TestName}%"));
+            }
+            if (!string.IsNullOrEmpty(test.OutDate))
+            {
+                Query.Where(x => x.OutDate BETWEEN test.OutDate);
+            }
+            if (!string.IsNullOrEmpty(test.Gender))
+            {
+                Query.Where(x => EF.Functions.Like(x.Gender, $"%{test.Gender}%"));
             }
             if (!string.IsNullOrEmpty(test.CreateTime))
             {
