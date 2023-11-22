@@ -19,6 +19,5 @@ namespace ConsoleApp1.GenAttribute
         public string ClassDescription { get; set; }
         public GenPropConfigurationAttribute PkProp { get; set; }
         public List<GenPropConfigurationAttribute> Props { get; set; } = new List<GenPropConfigurationAttribute>();
-        public string ClassNameCamelcase => StrUtil.ToFirstLetterLowerCase(ClassName);
     }
 }

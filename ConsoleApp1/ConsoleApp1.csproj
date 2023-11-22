@@ -12,10 +12,6 @@
     <PackageReference Include="Scriban" Version="5.9.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="results\csharp\" />
-  </ItemGroup>
-
   
 
 </Project>

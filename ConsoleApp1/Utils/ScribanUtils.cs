@@ -17,6 +17,7 @@ namespace ConsoleApp1.Utils
         }
         public static TemplateContext PrepareContext(GenClassConfigurationAttribute genClass)
         {
+
             var context = new TemplateContext()
             {
                 MemberRenamer = (member) =>
@@ -24,11 +25,6 @@ namespace ConsoleApp1.Utils
                     return member.Name;
                 }
             };
-            string nameSpace = "Garen.MultiTenant";
-            string moduleName = "Admin";
-            string genType = "crud";
-            string genPath = Directory.GetCurrentDirectory();
-            string dbContext = "ApplicationDbContext";
             string dicts = genClass.Props
                 .Where(x => !string.IsNullOrEmpty(x.DictType))
                 .Where(x => new List<string> { "select", "radio", "checkbox" }.Contains(x.HtmlType))
@@ -36,12 +32,11 @@ namespace ConsoleApp1.Utils
                 .ToList().Aggregate((current, next) => current + "," + next);
             var scriptObject = new ScriptObject
             {
-                { "nameSpace", nameSpace },
-                { "moduleName", moduleName },
-                { "moduleNameCamelcase", StrUtil.ToFirstLetterLowerCase(moduleName)},
-                { "genType", genType },
-                { "genPath", genPath },
-                { "dbContext", dbContext },
+                { "nameSpace", GenConfiguration.nameSpace },
+                { "moduleName", GenConfiguration.moduleName },
+                { "genType", GenConfiguration.genType },
+                { "genPath", GenConfiguration.genPath },
+                { "dbContext", GenConfiguration.dbContext },
                 { "genClass", genClass },
 
                 //

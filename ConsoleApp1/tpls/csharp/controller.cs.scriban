@@ -14,17 +14,17 @@ namespace Garen.MultiTenant.Api.Controllers
     [ApiController]
     public class {{genClass.ClassName}}Controller : ControllerBase
     {
-        private readonly {{genClass.ClassName}}Service _{{genClass.ClassNameCamelcase}}Service;
+        private readonly {{genClass.ClassName}}Service _{{genClass.ClassName | uncapitalize}}Service;
         private readonly IWebHostEnvironment _env;
-        public {{genClass.ClassName}}Controller({{genClass.ClassName}}Service {{genClass.ClassNameCamelcase}}Service, IWebHostEnvironment environment)
+        public {{genClass.ClassName}}Controller({{genClass.ClassName}}Service {{genClass.ClassName | uncapitalize}}Service, IWebHostEnvironment environment)
         {
-            _{{genClass.ClassNameCamelcase}}Service = {{genClass.ClassNameCamelcase}}Service;
+            _{{genClass.ClassName | uncapitalize}}Service = {{genClass.ClassName | uncapitalize}}Service;
             _env = environment;
         }
         [HttpGet("list")]
         public async Task<IActionResult> GetPage([FromQuery] {{genClass.ClassName}} {{genClass.BusinessName}})
         {
-            var list = await _{{genClass.ClassNameCamelcase}}Service.GetPage({{genClass.BusinessName}});
+            var list = await _{{genClass.ClassName | uncapitalize}}Service.GetPage({{genClass.BusinessName}});
             var result = new TableDataInfo<{{genClass.ClassName}}>(list, list.Count);
             return Ok(result);
 
@@ -32,27 +32,27 @@ namespace Garen.MultiTenant.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById({{genClass.PkProp.PropType}} id)
         {
-            var {{genClass.BusinessName}} = await _{{genClass.ClassNameCamelcase}}Service.GetByIdAsync(id);
+            var {{genClass.BusinessName}} = await _{{genClass.ClassName | uncapitalize}}Service.GetByIdAsync(id);
             return Ok(new { code = 200, msg = "操作成功", data = {{genClass.BusinessName}} });
         }
 
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] {{genClass.ClassName}} {{genClass.BusinessName}})
         {
-            await _{{genClass.ClassNameCamelcase}}Service.AddAsync({{genClass.BusinessName}});
+            await _{{genClass.ClassName | uncapitalize}}Service.AddAsync({{genClass.BusinessName}});
             return Ok(new { code = 200, msg = "成功" });
         }
 
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] {{genClass.ClassName}} {{genClass.BusinessName}})
         {
-            await _{{genClass.ClassNameCamelcase}}Service.UpdateAsync({{genClass.BusinessName}});
+            await _{{genClass.ClassName | uncapitalize}}Service.UpdateAsync({{genClass.BusinessName}});
             return Ok(new { code = 200, msg = "成功" });
         }
         [HttpDelete("{ids}")]
         public async Task<IActionResult> Delete([ModelBinder(typeof(QueryArray<{{genClass.PkProp.PropType}}>))] {{genClass.PkProp.PropType}}[] ids)
         {
-            await _{{genClass.ClassNameCamelcase}}Service.DeleteRange(ids);
+            await _{{genClass.ClassName | uncapitalize}}Service.DeleteRange(ids);
             return Ok(new { code = 200, msg = "成功" });
         }
     }
