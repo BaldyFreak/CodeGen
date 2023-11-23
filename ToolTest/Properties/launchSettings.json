@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ToolTest": {
+      "commandName": "Project",
+      "commandLineArgs": "-- Hello from the bot"
+    }
+  }
+}

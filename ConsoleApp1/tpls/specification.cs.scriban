@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace Garen.MultiTenant.Service.{{moduleName}}.Specifications
+namespace Garen.MultiTenant.Service.{{genClass.ModuleName}}.Specifications
 {
     public class {{genClass.ClassName}}Specification : Specification<{{genClass.ClassName}}>
     {

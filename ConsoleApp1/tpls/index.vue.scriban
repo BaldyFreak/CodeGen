@@ -1,5 +1,5 @@
 {{- ## 全局私有变量 开始 ## -}}
-{{~ _moduleNameUnCapitalize=(moduleName | uncapitalize) ~}}
+{{~ _moduleNameUnCapitalize=(genClass.ModuleName | uncapitalize) ~}}
 {{~ _businessNameCapitalize=(genClass.BusinessName | string.capitalize) ~}}
 {{- ## 全局私有变量 结束 ## -}}
 <template>

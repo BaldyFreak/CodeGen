@@ -65,11 +65,11 @@ var templateContext = ScribanUtils.PrepareContext(genClass);
 
 List<string> templatePaths = new List<string>()
 {
-    @"./tpls/csharp/service.cs.scriban",
-    @"./tpls/csharp/specification.cs.scriban",
-    @"./tpls/csharp/controller.cs.scriban",
-    @"./tpls/csharp/api.js.scriban",
-    @"./tpls/csharp/index.vue.scriban",
+    @"./tpls/Service.cs.scriban",
+    @"./tpls/Specification.cs.scriban",
+    @"./tpls/Controller.cs.scriban",
+    @"./tpls/api.js.scriban",
+    @"./tpls/index.vue.scriban",
 };
 
 Dictionary<string, string> dataMap = new();
@@ -85,14 +85,27 @@ foreach (var templatePath in templatePaths)
 }
 
 
-Console.WriteLine(dataMap);
 
 
 
 
 foreach (var map in dataMap)
 {
-    var name = Path.GetFileNameWithoutExtension(map.Key);
-    var writePath = Path.Combine(@"C:\Users\Administrator\Desktop\test", $"{name}");
+    var fullName = Path.GetFileNameWithoutExtension(map.Key);
+    var name = Path.GetFileNameWithoutExtension(fullName);
+    var extension = Path.GetExtension(fullName);
+    string outPutName;
+    if (new List<string> { "Service","Controller","Specification"}.Contains(name))
+    {
+        outPutName = GenConfiguration.className+ name;
+    }
+    else
+    {
+        outPutName = name;
+    }
+    var writePath = Path.Combine(@"C:\Users\60474\Desktop\genDownload", $"{outPutName}{extension}");
     File.WriteAllText(writePath, map.Value);
 }
+
+Console.WriteLine("生成成功");
+

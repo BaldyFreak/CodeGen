@@ -1,17 +1,17 @@
 ﻿using Ardalis.Specification.EntityFrameworkCore;
-using Garen.MultiTenant.Service.{{moduleName}}.Specifications;
+using Garen.MultiTenant.Service.{{genClass.ModuleName}}.Specifications;
 using Garen.MultiTenant.Core.Entities;
 using Garen.MultiTenant.Core.Extensions;
 using Garen.MultiTenant.Infrastructure.Database.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace Garen.MultiTenant.Service.{{moduleName}}
+namespace Garen.MultiTenant.Service.{{genClass.ModuleName}}
 {
     public partial class {{genClass.ClassName}}Service : RepositoryBase<{{genClass.ClassName}}>
     {
-        private readonly {{dbContext}} _context;
+        private readonly {{genClass.DbContextName}} _context;
 
-        public {{genClass.ClassName}}Service({{dbContext}} context) : base(context)
+        public {{genClass.ClassName}}Service({{genClass.DbContextName}} context) : base(context)
         {
             _context = context;
         }

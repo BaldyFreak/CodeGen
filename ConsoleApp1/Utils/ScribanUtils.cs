@@ -32,14 +32,12 @@ namespace ConsoleApp1.Utils
                 .ToList().Aggregate((current, next) => current + "," + next);
             var scriptObject = new ScriptObject
             {
-                { "nameSpace", GenConfiguration.nameSpace },
-                { "moduleName", GenConfiguration.moduleName },
-                { "genType", GenConfiguration.genType },
-                { "genPath", GenConfiguration.genPath },
-                { "dbContext", GenConfiguration.dbContext },
-                { "genClass", genClass },
-
-                //
+                //{ "nameSpace", GenConfiguration.nameSpace },
+                //{ "moduleName", GenConfiguration.moduleName },
+                //{ "dbContext", GenConfiguration.dbContext },
+                //{ "genType", GenConfiguration.genType },
+                //{ "genPath", GenConfiguration.genPath },
+                //{ "genClass", genClass },
                 {"dicts",dicts },
 
             };

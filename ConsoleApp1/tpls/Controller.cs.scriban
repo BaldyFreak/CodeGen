@@ -1,4 +1,4 @@
-﻿using Garen.MultiTenant.Service.{{moduleName}};
+﻿using Garen.MultiTenant.Service.{{genClass.ModuleName}};
 using Garen.MultiTenant.Api.ModelBinders;
 using Garen.MultiTenant.Core.Dtos;
 using Garen.MultiTenant.Core.Entities;
@@ -10,7 +10,7 @@ using System.Web;
 
 namespace Garen.MultiTenant.Api.Controllers
 {
-    [Route("{{moduleName | uncapitalize}}/{{genClass.BusinessName}}")]
+    [Route("{{genClass.ModuleName | uncapitalize}}/{{genClass.BusinessName}}")]
     [ApiController]
     public class {{genClass.ClassName}}Controller : ControllerBase
     {
