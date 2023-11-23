@@ -14,28 +14,33 @@ namespace Garen.MultiTenant.Service.{{genClass.ModuleName}}.Specifications
     {
         public {{genClass.ClassName}}Specification({{genClass.ClassName}} {{genClass.BusinessName}})
         {
-            {{~ for prop in genClass.Props ~}}
-                {{~ if (prop.IsQuery)~}}
-                    {{~ if (prop.PropType=="string") ~}}
+        {{~ for prop in genClass.Props ~}}
+        {{~ if (prop.IsQuery && !prop.IsPk)~}}
+            {{~ if (prop.HtmlType=="input" && prop.QueryType == "LIKE") ~}}
             if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{prop.PropName}}))
             {
                 Query.Where(x => EF.Functions.Like(x.{{prop.PropName}}, $"%{ {{~genClass.BusinessName}}.{{prop.PropName~}} }%"));
             }
-                    {{~ end ~}}
-                    {{~ if (prop.PropType=="long" || prop.PropType=="int") ~}}
-             if ({{genClass.BusinessName}}.{{prop.PropName}} != 0)
-            {
-                Query.Where(x => x.{{prop.PropName}} == {{genClass.BusinessName}}.{{prop.PropName}});
-            }
-                    {{~ end ~}}
-                    {{~ if (prop.PropType=="DateTime") ~}}
+            {{~ else if (prop.HtmlType=="input" && prop.QueryType != "LIKE") ~}}
             if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{prop.PropName}}))
             {
                 Query.Where(x => x.{{prop.PropName}} {{prop.QueryType}} {{genClass.BusinessName}}.{{prop.PropName}});
             }
-                    {{~ end ~}}
-                {{~end~}}
+            {{~ else if (prop.HtmlType=="datetime" && prop.QueryType == "BETWEEN") ~}}
+            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{prop.PropName}}))
+            {
+                Query.Where(x => x.{{prop.PropName}} {{prop.QueryType}} {{genClass.BusinessName}}.{{prop.PropName}});
+            }
+            {{~ else if (prop.HtmlType=="datetime" && prop.QueryType != "BETWEEN") ~}}
+                Query.Where(x => x.{{prop.PropName}} {{prop.QueryType}} {{genClass.BusinessName}}.{{prop.PropName}});
+            {{~ else if (prop.HtmlType=="select" || prop.HtmlType=="checkbox" || prop.HtmlType=="radio") ~}}
+             if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{prop.PropName}}))
+            {
+                Query.Where(x => x.{{prop.PropName}} == {{genClass.BusinessName}}.{{prop.PropName}});
+            }
             {{~ end ~}}
+        {{~ end ~}}
+        {{~ end ~}}
         }
     }
 }

@@ -37,7 +37,7 @@ namespace ConsoleApp1.Utils
                 //{ "dbContext", GenConfiguration.dbContext },
                 //{ "genType", GenConfiguration.genType },
                 //{ "genPath", GenConfiguration.genPath },
-                //{ "genClass", genClass },
+                { "genClass", genClass },
                 {"dicts",dicts },
 
             };

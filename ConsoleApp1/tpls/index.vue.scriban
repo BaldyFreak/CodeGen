@@ -16,8 +16,8 @@
                     @keyup.enter.native="handleQuery"
                 />
             </el-form-item>
-            {{~ end ~}}
-            {{~ if (prop.HtmlType == "select" || prop.HtmlType == "radio" && prop.DictType != "") ~}}
+
+            {{~ else if (prop.HtmlType == "select" || prop.HtmlType == "radio" && prop.DictType != "") ~}}
             <el-form-item label="{{prop.PropDescription}}" prop="{{prop.PropName | uncapitalize}}">
                 <el-select v-model="queryParams.{{prop.PropName | uncapitalize}}" placeholder="请选择{{prop.PropDescription}}" clearable>
                 <el-option
@@ -28,15 +28,13 @@
                 />
                 </el-select>
             </el-form-item>
-            {{~ end ~}}
-            {{~ if (prop.HtmlType == "select" || prop.HtmlType == "radio" && prop.DictType == "") ~}}
+            {{~ else if (prop.HtmlType == "select" || prop.HtmlType == "radio" && prop.DictType == "") ~}}
             <el-form-item label="{{prop.PropDescription}}" prop="{{prop.PropName | uncapitalize}}">
                 <el-select v-model="queryParams.{{prop.PropName | uncapitalize}}" placeholder="请选择{{prop.PropDescription}}" clearable>
                     <el-option label="请选择字典生成" value=""/>
                 </el-select>
             </el-form-item>
-            {{~ end ~}}
-            {{~ if (prop.HtmlType == "datetime" && prop.QueryType != "BETWEEN") ~}}
+            {{~ else if (prop.HtmlType == "datetime" && prop.QueryType != "BETWEEN") ~}}
             <el-form-item label="{{prop.PropDescription}}" prop="{{prop.PropName | uncapitalize}}">
                 <el-date-picker clearable
                     v-model="queryParams.{{prop.PropName | uncapitalize}}"
@@ -45,8 +43,7 @@
                     placeholder="请选择{{prop.PropDescription}}">
                 </el-date-picker>
             </el-form-item>
-            {{~ end ~}}
-            {{~ if (prop.HtmlType == "datetime" && prop.QueryType == "BETWEEN") ~}}
+            {{~ else if (prop.HtmlType == "datetime" && prop.QueryType == "BETWEEN") ~}}
             <el-form-item label="{{prop.PropDescription}}">
                 <el-date-picker
                     v-model="daterange{{prop.PropName}}"
@@ -181,7 +178,7 @@
                         v-for="dict in dict.type.{{prop.DictType}}"
                         :key="dict.value"
                         :label="dict.value">
-                        {{dict.label}}
+                        {%{ {{dict.label}} }%}
                     </el-checkbox>
                     </el-checkbox-group>
                 </el-form-item>
@@ -202,7 +199,7 @@
                         {{~ else ~}}
                         :label="dict.value"
                         {{~ end ~}}
-                    >{{dict.label}}
+                    >{%{ {{dict.label}} }%}
                     </el-radio>
                     </el-radio-group>
                 </el-form-item>

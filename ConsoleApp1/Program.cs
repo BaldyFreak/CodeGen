@@ -46,9 +46,10 @@ using System.Reflection;
 //}
 #endregion
 
+var className = "TourScenery";
 var rootPath = Path.Combine(Assembly.GetExecutingAssembly().Location, @"../../../../");
 
-var type = AssemblyTypeUtil.GetTypeByClassName(GenConfiguration.className);
+var type = AssemblyTypeUtil.GetTypeByClassName(className);
 var genClass = type.GetCustomAttribute<GenClassConfigurationAttribute>();
 var props = type.GetProperties();
 foreach (var prop in props)
@@ -97,13 +98,13 @@ foreach (var map in dataMap)
     string outPutName;
     if (new List<string> { "Service","Controller","Specification"}.Contains(name))
     {
-        outPutName = GenConfiguration.className+ name;
+        outPutName = className + name;
     }
     else
     {
         outPutName = name;
     }
-    var writePath = Path.Combine(@"C:\Users\60474\Desktop\genDownload", $"{outPutName}{extension}");
+    var writePath = Path.Combine(@"C:\Users\Administrator\Desktop\genDownload", $"{outPutName}{extension}");
     File.WriteAllText(writePath, map.Value);
 }
 
