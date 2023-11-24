@@ -3,6 +3,7 @@ using EasyTool;
 using Scriban;
 using Scriban.Runtime;
 using System;
+using System.Text;
 
 namespace ConsoleApp1.Utils
 {
@@ -28,7 +29,7 @@ namespace ConsoleApp1.Utils
             string dicts = genClass.Props
                 .Where(x => !string.IsNullOrEmpty(x.DictType))
                 .Where(x => new List<string> { "select", "radio", "checkbox" }.Contains(x.HtmlType))
-                .Select(x=>x.DictType)
+                .Select(x=>$"'{x.DictType}'")
                 .ToList().Aggregate((current, next) => current + "," + next);
             var scriptObject = new ScriptObject
             {
@@ -47,6 +48,33 @@ namespace ConsoleApp1.Utils
                 return result;
             };
             scriptObject.Import("uncapitalize", UnCapitalize);
+
+            Func<string, string> ToSnakeCase = (str) =>
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                    return str;
+                }
+                var result = new StringBuilder();
+                for (int i = 0; i < str.Length; i++)
+                {
+                    char c = str[i];
+                    if (char.IsUpper(c))
+                    {
+                        if (i > 0 && str[i - 1] != '_')
+                        {
+                            result.Append('_');
+                        }
+                        result.Append(char.ToLower(c));
+                    }
+                    else
+                    {
+                        result.Append(c);
+                    }
+                }
+                return result.ToString();
+            };
+            scriptObject.Import("to_snake_case", ToSnakeCase);
             context.PushGlobal(scriptObject);
             return context;
         }

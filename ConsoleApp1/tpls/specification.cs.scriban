@@ -27,14 +27,23 @@ namespace Garen.MultiTenant.Service.{{genClass.ModuleName}}.Specifications
                 Query.Where(x => x.{{prop.PropName}} {{prop.QueryType}} {{genClass.BusinessName}}.{{prop.PropName}});
             }
             {{~ else if (prop.HtmlType=="datetime" && prop.QueryType == "BETWEEN") ~}}
-            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{prop.PropName}}))
+            if ({{genClass.BusinessName}}.Params != null && {{genClass.BusinessName}}.Params.Count > 0)
             {
-                Query.Where(x => x.{{prop.PropName}} {{prop.QueryType}} {{genClass.BusinessName}}.{{prop.PropName}});
+                if (!string.IsNullOrEmpty({{genClass.BusinessName}}.Params["begin{{prop.PropName}}"]))
+                {
+                    var begin{{prop.PropName}} = DateTime.Parse({{genClass.BusinessName}}.Params["begin{{prop.PropName}}"]);
+                    Query.Where(x => x.{{prop.PropName}} >= begin{{prop.PropName}});
+                }
+                if (!string.IsNullOrEmpty({{genClass.BusinessName}}.Params["end{{prop.PropName}}"]))
+                {
+                    var end{{prop.PropName}} = DateTime.Parse({{genClass.BusinessName}}.Params["end{{prop.PropName}}"]);
+                    Query.Where(x => x.{{prop.PropName}} <= end{{prop.PropName}});
+                }
             }
             {{~ else if (prop.HtmlType=="datetime" && prop.QueryType != "BETWEEN") ~}}
                 Query.Where(x => x.{{prop.PropName}} {{prop.QueryType}} {{genClass.BusinessName}}.{{prop.PropName}});
             {{~ else if (prop.HtmlType=="select" || prop.HtmlType=="checkbox" || prop.HtmlType=="radio") ~}}
-             if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{prop.PropName}}))
+            if (!string.IsNullOrEmpty({{genClass.BusinessName}}.{{prop.PropName}}))
             {
                 Query.Where(x => x.{{prop.PropName}} == {{genClass.BusinessName}}.{{prop.PropName}});
             }

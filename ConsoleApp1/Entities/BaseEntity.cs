@@ -11,29 +11,29 @@ namespace ConsoleApp1.Entities
     {
         [GenPropConfiguration(propType: "string", propName: "CreateBy", propDescription: "创建者",
             isPk: false, isRequired: false, isInsert: false, isList: false, isQuery: false,
-            queryType: "==", htmlType: "input", dictType: "")]
+            queryType: "==", htmlType: "", dictType: "")]
         public string CreateBy { get; set; }
 
 
         [GenPropConfiguration(propType: "string", propName: "UpdateBy", propDescription: "更新者",
             isPk: false, isRequired: false, isInsert: false, isList: false, isQuery: false,
-            queryType: "==", htmlType: "input", dictType: "")]
+            queryType: "==", htmlType: "", dictType: "")]
         public string UpdateBy { get; set; }
 
 
         [GenPropConfiguration(propType: "DateTime", propName: "CreateTime", propDescription: "创建时间",
             isPk: false, isRequired: false, isInsert: false, isList: false, isQuery: false,
-            queryType: "==", htmlType: "date-picker", dictType: "")]
+            queryType: "==", htmlType: "", dictType: "")]
         public DateTime CreateTime { get; set; }
 
         [GenPropConfiguration(propType: "DateTime", propName: "UpdateTime", propDescription: "更新时间",
             isPk: false, isRequired: false, isInsert: false, isList: false, isQuery: false,
-            queryType: "==", htmlType: "date-picker", dictType: "")]
+            queryType: "==", htmlType: "", dictType: "")]
         public DateTime UpdateTime { get; set; }
 
         [GenPropConfiguration(propType: "string", propName: "Remark", propDescription: "备注",
-            isPk: false, isRequired: false, isInsert: false, isList: false, isQuery: false,
-            queryType: "==", htmlType: "input", dictType: "")]
+            isPk: false, isRequired: false, isInsert: true, isList: false, isQuery: false,
+            queryType: "==", htmlType: "textarea", dictType: "")]
         public string Remark { get; set; }
     }
 }

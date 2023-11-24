@@ -130,7 +130,7 @@
             @pagination="getList" />
 
         <!-- 添加或修改{{genClass.ClassDescription}}信息对话框 -->
-        <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+        <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
             {{~ for prop in genClass.Props ~}}
             {{~ if(prop.IsInsert && !prop.IsPk) ~}}
@@ -235,7 +235,7 @@
 </template>
   
 <script>
-import { list{{_businessNameCapitalize}}, get{{_businessNameCapitalize}}, del{{_businessNameCapitalize}}, add{{_businessNameCapitalize}}, update{{_businessNameCapitalize}} } from "@/api/system/{{genClass.BusinessName}}";
+import { list{{_businessNameCapitalize}}, get{{_businessNameCapitalize}}, del{{_businessNameCapitalize}}, add{{_businessNameCapitalize}}, update{{_businessNameCapitalize}} } from "@/api/{{_moduleNameUnCapitalize}}/{{genClass.BusinessName}}";
 
 export default {
     name: "{{genClass.BusinessName}}",
@@ -328,10 +328,12 @@ export default {
         reset() {
             this.form = {
             {{~ for prop in genClass.Props ~}}
-            {{~ if(prop.HtmlType == "checkbox") ~}}
+            {{~ if(!prop.IsPk) ~}}
+                {{~ if(prop.HtmlType == "checkbox") ~}}
             {{prop.PropName | uncapitalize}}:[]{{if(for.index != array.size(genClass.Props))}},{{end}}
-            {{~ else ~}}
+                {{~ else ~}}
             {{prop.PropName | uncapitalize}}:null{{if(for.index != array.size(genClass.Props))}},{{end}}
+                {{~ end ~}}
             {{~ end ~}}
             {{~ end ~}}
             };

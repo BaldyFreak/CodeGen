@@ -69,6 +69,7 @@ List<string> templatePaths = new List<string>()
     @"./tpls/Service.cs.scriban",
     @"./tpls/Specification.cs.scriban",
     @"./tpls/Controller.cs.scriban",
+    @"./tpls/Configuration.cs.scriban",
     @"./tpls/api.js.scriban",
     @"./tpls/index.vue.scriban",
 };
@@ -96,7 +97,7 @@ foreach (var map in dataMap)
     var name = Path.GetFileNameWithoutExtension(fullName);
     var extension = Path.GetExtension(fullName);
     string outPutName;
-    if (new List<string> { "Service","Controller","Specification"}.Contains(name))
+    if (new List<string> { "Service","Controller","Specification", "Configuration" }.Contains(name))
     {
         outPutName = className + name;
     }
@@ -104,7 +105,7 @@ foreach (var map in dataMap)
     {
         outPutName = name;
     }
-    var writePath = Path.Combine(@"C:\Users\Administrator\Desktop\genDownload", $"{outPutName}{extension}");
+    var writePath = Path.Combine(@"C:\Users\60474\Desktop\genDownload", $"{outPutName}{extension}");
     File.WriteAllText(writePath, map.Value);
 }
 

@@ -1,0 +1,36 @@
+﻿using Garen.MultiTenant.Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Garen.MultiTenant.Infrastructure.Database.Configurations
+{
+    public class TourSceneryConfiguration : IEntityTypeConfiguration<TourScenery>
+    {
+        public void Configure(EntityTypeBuilder<{{genClass.ClassName}}> entity)
+        {
+            {{~ for prop in genClass.Props ~}}
+            {{~ if(prop.IsPk) ~}}
+            entity.HasKey(e => e.{{prop.PropName}}).HasName("PRIMARY");
+            entity.ToTable("{{genClass.ModuleName | uncapitalize}}_{{genClass.BusinessName}}");
+            entity.ToTable(e => e.HasComment("{{genClass.ClassDescription}}"));
+
+            entity.Property(e => e.{{prop.PropName}})
+            .HasColumnName("{{prop.PropName | to_snake_case}}")
+            .HasComment("{{prop.PropDescription}}");
+
+            {{~ else if(prop.PropType == "DateTime") ~}}
+            entity.Property(e => e.{{prop.PropName}})
+            .HasColumnType("datetime")
+            .HasColumnName("{{prop.PropName | to_snake_case}}")
+            .HasComment("{{prop.PropDescription}}");
+
+            {{~ else ~}}
+            entity.Property(e => e.{{prop.PropName}})
+            .HasColumnName("{{prop.PropName | to_snake_case}}")
+            .HasComment("{{prop.PropDescription}}");
+
+            {{~ end ~}}
+            {{~ end ~}}
+        }
+    }
+}

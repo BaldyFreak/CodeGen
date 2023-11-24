@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询参数列表
 export function list{{genClass.BusinessName | string.capitalize}}(query) {
   return request({
-    url: '/system/{{genClass.BusinessName}}/list',
+    url: '/{{genClass.ModuleName | uncapitalize}}/{{genClass.BusinessName}}/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function list{{genClass.BusinessName | string.capitalize}}(query) {
 // 查询参数详细
 export function get{{genClass.BusinessName | string.capitalize}}(id) {
   return request({
-    url: '/system/{{genClass.BusinessName}}/' + id,
+    url: '/{{genClass.ModuleName | uncapitalize}}/{{genClass.BusinessName}}/' + id,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function get{{genClass.BusinessName | string.capitalize}}(id) {
 // 新增参数配置
 export function add{{genClass.BusinessName | string.capitalize}}(data) {
   return request({
-    url: '/system/{{genClass.BusinessName}}',
+    url: '/{{genClass.ModuleName | uncapitalize}}/{{genClass.BusinessName}}',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function add{{genClass.BusinessName | string.capitalize}}(data) {
 // 修改参数配置
 export function update{{genClass.BusinessName | string.capitalize}}(data) {
   return request({
-    url: '/system/{{genClass.BusinessName}}',
+    url: '/{{genClass.ModuleName | uncapitalize}}/{{genClass.BusinessName}}',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function update{{genClass.BusinessName | string.capitalize}}(data) {
 // 删除参数配置
 export function del{{genClass.BusinessName | string.capitalize}}(id) {
   return request({
-    url: '/system/{{genClass.BusinessName}}/' + id,
+    url: '/{{genClass.ModuleName | uncapitalize}}/{{genClass.BusinessName}}/' + id,
     method: 'delete'
   })
 }

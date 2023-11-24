@@ -14,7 +14,7 @@ namespace ConsoleApp1.Entities
      */
     [GenClassConfiguration(nameSpaceBase: "Garen.MultiTenant", moduleName: "Tour", dbContextName: "ApplicationDbContext", genType: "crud",
         className: "TourScenery", bussinessName: "scenery", classDescription: "景区信息")]
-    public class TourScenery
+    public class TourScenery:BaseEntity
     {
         [GenPropConfiguration(propType: "long", propName: "SceneryId", propDescription: "主键",
             isPk: true, isRequired: false, isInsert: false, isList: true, isQuery: false,
@@ -63,7 +63,7 @@ namespace ConsoleApp1.Entities
 
         [GenPropConfiguration(propType: "string", propName: "Detail", propDescription: "景区详情",
             isPk: false, isRequired: true, isInsert: true, isList: true, isQuery: false,
-            queryType: "", htmlType: "textarea", dictType: "")]
+            queryType: "", htmlType: "editor", dictType: "")]
         public string Detail { get; set; }
     }
 }
